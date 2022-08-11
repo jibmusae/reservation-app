@@ -6,12 +6,14 @@ import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 import baseStyle from '../styles/baseStyle';
 import axios from 'axios';
+import { GiHamburgerMenu } from 'react-icons/gi';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isLogin, setIsLogin] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
   const handleLoginClick = () => {
@@ -96,6 +98,90 @@ const Navbar = () => {
               onClick={() => navigate('/')}
             />
           </LogoWrap>
+          <HamburgerButton onClick={() => setMobileMenuOpen(true)}>
+            <GiHamburgerMenu size="100%" color={baseStyle.navbarColor} />
+          </HamburgerButton>
+          <ResponsiveMenuBackground
+            show={mobileMenuOpen}
+            onClick={() => setMobileMenuOpen(false)}
+          />
+          <ResponsiveMenuWrap show={mobileMenuOpen}>
+            <ResponsiveMenu
+              onClick={() => {
+                setMobileMenuOpen(false);
+                navigate('/about');
+              }}
+            >
+              About
+            </ResponsiveMenu>
+            <ResponsiveMenu
+              onClick={() => {
+                setMobileMenuOpen(false);
+                navigate('/site');
+              }}
+            >
+              Cabins
+            </ResponsiveMenu>
+            <ResponsiveMenu
+              onClick={() => {
+                setMobileMenuOpen(false);
+                navigate('/reservation');
+              }}
+            >
+              Reservation
+            </ResponsiveMenu>
+            <ResponsiveBar />
+            {isLogin ? (
+              <>
+                {isAdmin ? (
+                  <ResponsiveMenu
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      navigate('/admin');
+                    }}
+                  >
+                    Admin
+                  </ResponsiveMenu>
+                ) : (
+                  <ResponsiveMenu
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      navigate('/mypage');
+                    }}
+                  >
+                    MyPage
+                  </ResponsiveMenu>
+                )}
+                <ResponsiveMenu
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    handleLogoutClick();
+                  }}
+                >
+                  Logout
+                </ResponsiveMenu>
+              </>
+            ) : (
+              <>
+                <ResponsiveMenu
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    handleLoginClick();
+                  }}
+                >
+                  Login
+                </ResponsiveMenu>
+                <ResponsiveMenu
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    handleRegisterClick();
+                  }}
+                >
+                  Register
+                </ResponsiveMenu>
+              </>
+            )}
+          </ResponsiveMenuWrap>
           <NavigationMenuWrap>
             <NavigationMunu
               active={currentPage === 'about'}
@@ -162,6 +248,10 @@ const NavigationBar = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 0 4rem;
+
+  @media screen and (max-width: 600px) {
+    padding: 0 1.5rem;
+  }
 `;
 
 const LogoWrap = styled.div`
@@ -176,6 +266,62 @@ const Logo = styled.img`
   }
 `;
 
+const HamburgerButton = styled.div`
+  display: none;
+  width: 2rem;
+  height: 2rem;
+
+  @media screen and (max-width: 600px) {
+    display: block;
+  }
+`;
+
+const ResponsiveMenuBackground = styled.div`
+  display: ${(props) => (props.show ? 'block' : 'none')};
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 99996;
+`;
+
+const ResponsiveMenuWrap = styled.ul`
+  display: ${(props) => (props.show ? 'flex' : 'none')};
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 60%;
+  height: 100%;
+  padding: 0;
+  list-style: none;
+  background-color: white;
+  z-index: 99997;
+`;
+
+const ResponsiveMenu = styled.li`
+  width: 100%;
+  text-align: center;
+  font-size: ${baseStyle.navbarFontSize};
+  color: ${baseStyle.navbarColor};
+  padding: 0.5rem;
+
+  &:first-child {
+    margin-top: 1rem;
+  }
+`;
+
+const ResponsiveBar = styled.div`
+  width: 90%;
+  height: 1px;
+  margin: 1rem 0;
+  border-bottom: 1px solid lightgray;
+`;
+
 const NavigationMenuWrap = styled.ul`
   height: 100%;
   display: flex;
@@ -184,6 +330,10 @@ const NavigationMenuWrap = styled.ul`
   margin: 0;
   padding: 0;
   list-style: none;
+
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const NavigationMunu = styled.li`
@@ -208,6 +358,10 @@ const SignWrap = styled.ul`
   justify-content: end;
   list-style: none;
   width: 200px;
+
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const Sign = styled.li`

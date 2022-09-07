@@ -40,4 +40,9 @@ const Main = styled.main`
   align-items: center;
   width: 1280px;
   margin: 2rem;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin: 1rem;
+  }
 `;

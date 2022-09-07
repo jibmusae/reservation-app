@@ -85,6 +85,11 @@ const HomeButtonWrap = styled.div`
   transform: translate(-50%, -50%);
   display: flex;
   justify-content: space-between;
+
+  @media screen and (max-width: 768px) {
+    width: 200px;
+    flex-direction: column;
+  }
 `;
 
 const HomeButton = styled.button`
@@ -104,5 +109,11 @@ const HomeButton = styled.button`
   &:hover {
     color: #222;
     background-color: ${baseStyle.mainColor};
+  }
+
+  @media screen and (max-width: 768px) {
+    & + & {
+      margin-top: 1.5rem;
+    }
   }
 `;

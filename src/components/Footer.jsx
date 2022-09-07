@@ -33,6 +33,12 @@ const Container = styled.footer`
   margin-top: 4rem;
   padding: 1rem 4rem;
   background-color: white;
+
+  @media screen and (max-width: 768px) {
+    height: 100px;
+    margin-top: 2rem;
+    padding: 1rem;
+  }
 `;
 
 const LogoWrap = styled.div`
@@ -40,6 +46,10 @@ const LogoWrap = styled.div`
   align-items: center;
   width: 150px;
   height: 85px;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Logo = styled.img`
@@ -57,8 +67,17 @@ const ContentWrap = styled.div`
   flex: 1;
   color: ${baseStyle.navbarColor};
   font-size: ${baseStyle.contentFontSize};
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.7rem;
+  }
 `;
 
 const Content = styled.p`
   margin: 0 2rem 0.25rem;
+
+  @media screen and (max-width: 768px) {
+    margin: 0 1rem;
+    text-align: center;
+  }
 `;

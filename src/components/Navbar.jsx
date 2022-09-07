@@ -249,7 +249,7 @@ const NavigationBar = styled.nav`
   align-items: center;
   padding: 0 4rem;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 768px) {
     padding: 0 1.5rem;
   }
 `;
@@ -271,7 +271,7 @@ const HamburgerButton = styled.div`
   width: 2rem;
   height: 2rem;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 768px) {
     display: block;
   }
 `;
@@ -331,7 +331,7 @@ const NavigationMenuWrap = styled.ul`
   padding: 0;
   list-style: none;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 768px) {
     display: none;
   }
 `;
@@ -359,7 +359,7 @@ const SignWrap = styled.ul`
   list-style: none;
   width: 200px;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 768px) {
     display: none;
   }
 `;
@@ -371,7 +371,7 @@ const Sign = styled.li`
 
   &:hover {
     cursor: pointer;
-    color: ${baseStyle.navbarHoverColor};
+    color: ${baseStyle.mainHoverColor};
   }
 
   & + & {
